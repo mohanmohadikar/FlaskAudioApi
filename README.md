@@ -14,14 +14,16 @@ baseUrl/add
 ```
 ```
 {
-    "name":"audiobook2",
-    "duration":555,
-    "type":"audiobook",
-    "content":"audiobook2url",
-    "host":"",
-    "participants":[],
-    "author":"a2",
-    "narrator":"n2"
+    "type":"podcast",
+    "audioFileMetadata":{
+        "name":"Podcast3",
+        "duration":838,
+        "content":"podcast3url",
+        "host":"h1",
+        "participants":["p1", "p2", "p3", "p4", "p5"],
+        "author":"",
+        "narrator":""
+    }
 }
 ```
 
@@ -46,14 +48,16 @@ baseUrl/update/<id>
 ```
 ```
 {
-    "name":"audiobook2",
-    "duration":555,
-    "type":"audiobook",
-    "content":"audiobook2url",
-    "host":"",
-    "participants":[],
-    "author":"a2",
-    "narrator":"n2"
+    "type":"podcast",
+    "audioFileMetadata":{
+        "name":"Podcast3",
+        "duration":838,
+        "content":"podcast3url",
+        "host":"h1",
+        "participants":["p1", "p2", "p3", "p4", "p5", "p6"],
+        "author":"",
+        "narrator":""
+    }
 }
 ```
 
