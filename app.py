@@ -4,6 +4,7 @@ from bson.json_util import dumps
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+from validate import validateParticipants, validatePodcast, validateName, validateDuration, validateAudioBook
 
 # initializing fask app.
 app = Flask(__name__)
@@ -21,14 +22,27 @@ def add_audio():
     _type = _json['type']
     _content = _json['content']
     _upload_time = datetime.datetime.now()
+    _host = _json['host']
+    _participants = _json['participants']
+    _author = _json['author']
+    _narrator = _json['narrator']
 
-    if _name and _duration and _type and _content and _upload_time and request.method == 'POST':
+    if (validateName(_name) and validateDuration(_duration) 
+    and _type and _content and _upload_time 
+    and validatePodcast(_type, _host) 
+    and validateParticipants(_participants) 
+    and validateAudioBook(_type, _author, _narrator) 
+    and request.method == 'POST'):
         id = mongo.db.audio.insert({
             'name':_name,
             'duration':_duration,
             'type':_type,
             'content':_content,
-            'upload_time':_upload_time
+            'upload_time':_upload_time,
+            'host':_host,
+            'participants':_participants,
+            'author':_author,
+            'narrator':_narrator
         })
 
         resp = jsonify("AUDIO ADDED SUCCESSFULLY")
@@ -70,8 +84,17 @@ def update_audio(id):
     _type = _json['type']
     _content = _json['content']
     _upload_time = datetime.datetime.now()
+    _host = _json['host']
+    _participants = _json['participants']
+    _author = _json['author']
+    _narrator = _json['narrator']
 
-    if _name and _duration and _type and _content and _upload_time and _id and request.method == 'PUT':
+    if (validateName(_name) and validateDuration(_duration) 
+    and _type and _content and _upload_time 
+    and validatePodcast(_type, _host) 
+    and validateParticipants(_participants) 
+    and validateAudioBook(_type, _author, _narrator) 
+    and request.method == 'PUT'):
         mongo.db.audio.update_one(
             {
                 '_id':ObjectId(_id['$oid']) if '$oid' in _id else ObjectId(_id)
@@ -82,7 +105,11 @@ def update_audio(id):
                     'duration':_duration,
                     'type':_type,
                     'content':_content,
-                    'upload_time':_upload_time
+                    'upload_time':_upload_time,
+                    'host':_host,
+                    'participants':_participants,
+                    'author':_author,
+                    'narrator':_narrator
                 }
             }
         )
@@ -98,7 +125,7 @@ def update_audio(id):
 def not_found(error=None):
     message = {
         'status':404,
-        'message':'NOT FOUND' + request.url
+        'message':'NOT FOUND' + request.url + request.error
     }
     resp = jsonify(message)
     resp.status_code = 404
