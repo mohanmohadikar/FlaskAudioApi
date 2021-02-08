@@ -32,17 +32,21 @@ def add_audio():
     and validateParticipants(_participants) 
     and validateAudioBook(_type, _author, _narrator) 
     and request.method == 'POST'):
-        id = mongo.db.audio.insert({
-            'name':_name,
-            'duration':_duration,
-            'type':_type,
-            'content':_content,
-            'upload_time':_upload_time,
-            'host':_host,
-            'participants':_participants,
-            'author':_author,
-            'narrator':_narrator
-        })
+        id = mongo.db.audio.insert(
+            {
+                'type':_type,
+                'audioFileMetadata':{
+                    'name':_name,
+                    'duration':_duration,
+                    'content':_content,
+                    'upload_time':_upload_time,
+                    'host':_host,
+                    'participants':_participants,
+                    'author':_author,
+                    'narrator':_narrator
+                }
+            }
+        )
 
         resp = jsonify("AUDIO ADDED SUCCESSFULLY")
         resp.status_code = 200
@@ -78,15 +82,15 @@ def delete_audio(id):
 def update_audio(id):
     _id = id
     _json = request.json
-    _name = _json['name']
-    _duration = _json['duration']
+    _name = _json['audioFileMetadata']['name']
+    _duration = _json['audioFileMetadata']['duration']
     _type = _json['type']
-    _content = _json['content']
+    _content = _json['audioFileMetadata']['content']
     _upload_time = datetime.datetime.now()
-    _host = _json['host']
-    _participants = _json['participants']
-    _author = _json['author']
-    _narrator = _json['narrator']
+    _host = _json['audioFileMetadata']['host']
+    _participants = _json['audioFileMetadata']['participants']
+    _author = _json['audioFileMetadata']['author']
+    _narrator = _json['audioFileMetadata']['narrator']
 
     if (validateName(_name) and validateDuration(_duration) 
     and _type and _content and _upload_time 
@@ -99,16 +103,18 @@ def update_audio(id):
                 '_id':ObjectId(_id['$oid']) if '$oid' in _id else ObjectId(_id)
             },
             {
-                '$set': {
-                    'name':_name,
-                    'duration':_duration,
+                '$set':{
                     'type':_type,
-                    'content':_content,
-                    'upload_time':_upload_time,
-                    'host':_host,
-                    'participants':_participants,
-                    'author':_author,
-                    'narrator':_narrator
+                    'audioFileMetadata':{
+                        'name':_name,
+                        'duration':_duration,
+                        'content':_content,
+                        'upload_time':_upload_time,
+                        'host':_host,
+                        'participants':_participants,
+                        'author':_author,
+                        'narrator':_narrator
+                    }
                 }
             }
         )
