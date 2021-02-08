@@ -1,13 +1,13 @@
 # FlaskAudioApi
 ## This is a simple example of CRUD operations using Python(Flask) with NoSql(MongoDB).
-<!---
+
 ### Heroku Base url : 
 "https://flask-audio-api.herokuapp.com"
---->
+
 ### LocalHost Base url : 
 "http://localhost:5000" or "http://127.0.0.1:5000"
 
-### endpoints:
+### Endpoints:
 1) Add audio:
 ```
 baseUrl/add
