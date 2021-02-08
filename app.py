@@ -9,7 +9,7 @@ from validate import validateParticipants, validatePodcast, validateName, valida
 app = Flask(__name__)
 
 app.secret_key = "secretkey"
-app.config['MONGO_URI'] = "mongodb+srv://mohan:mohanmohan@cluster0.haxfw.mongodb.net/<dbname>?retryWrites=true&w=majority"
+#app.config['MONGO_URI'] = "mongodb+srv://mohan:mohanmohan@cluster0.haxfw.mongodb.net/<dbname>?retryWrites=true&w=majority"
 
 mongo = PyMongo(app)
 
