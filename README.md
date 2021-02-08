@@ -7,6 +7,11 @@
 ### LocalHost Base url : 
 "http://localhost:5000" or "http://127.0.0.1:5000"
 
+### Setting up server:
+```
+python app.py
+```
+
 ### Endpoints:
 1) Add audio:
 ```
