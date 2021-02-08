@@ -1,27 +1,29 @@
 # FlaskAudioApi
 ## This is a simple example of CRUD operations using Python(Flask) with NoSql(MongoDB).
-<!---
+
 ### Heroku Base url : 
 "https://flask-audio-api.herokuapp.com"
---->
+
 ### LocalHost Base url : 
 "http://localhost:5000" or "http://127.0.0.1:5000"
 
-### endpoints:
+### Endpoints:
 1) Add audio:
 ```
 baseUrl/add
 ```
 ```
 {
-    "name":"audiobook2",
-    "duration":555,
-    "type":"audiobook",
-    "content":"audiobook2url",
-    "host":"",
-    "participants":[],
-    "author":"a2",
-    "narrator":"n2"
+    "type":"podcast",
+    "audioFileMetadata":{
+        "name":"Podcast3",
+        "duration":838,
+        "content":"podcast3url",
+        "host":"h1",
+        "participants":["p1", "p2", "p3", "p4", "p5"],
+        "author":"",
+        "narrator":""
+    }
 }
 ```
 
@@ -46,14 +48,16 @@ baseUrl/update/<id>
 ```
 ```
 {
-    "name":"audiobook2",
-    "duration":555,
-    "type":"audiobook",
-    "content":"audiobook2url",
-    "host":"",
-    "participants":[],
-    "author":"a2",
-    "narrator":"n2"
+    "type":"podcast",
+    "audioFileMetadata":{
+        "name":"Podcast3",
+        "duration":838,
+        "content":"podcast3url",
+        "host":"h1",
+        "participants":["p1", "p2", "p3", "p4", "p5", "p6"],
+        "author":"",
+        "narrator":""
+    }
 }
 ```
 
