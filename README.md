@@ -73,5 +73,5 @@ Note: Make sure your input audio file (for eg. "example.mp3" is present in curre
 ```
 python audioUtility.py
 ```
-Resultant Audio file will be generated as "example_op.mp3".(Use "print(result_string)")
+Resultant Audio file will be generated as "example_op.mp3".
 
