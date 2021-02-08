@@ -16,15 +16,15 @@ mongo = PyMongo(app)
 @app.route('/add', methods=['POST'])
 def add_audio():
     _json = request.json
-    _name = _json['name']
-    _duration = _json['duration']
     _type = _json['type']
-    _content = _json['content']
+    _name = _json['audioFileMetadata']['name']
+    _duration = _json['audioFileMetadata']['duration']
+    _content = _json['audioFileMetadata']['content']
     _upload_time = datetime.datetime.now()
-    _host = _json['host']
-    _participants = _json['participants']
-    _author = _json['author']
-    _narrator = _json['narrator']
+    _host = _json['audioFileMetadata']['host']
+    _participants = _json['audioFileMetadata']['participants']
+    _author = _json['audioFileMetadata']['author']
+    _narrator = _json['audioFileMetadata']['narrator']
 
     if (validateName(_name) and validateDuration(_duration) 
     and _type and _content and _upload_time 
@@ -82,9 +82,9 @@ def delete_audio(id):
 def update_audio(id):
     _id = id
     _json = request.json
+    _type = _json['type']
     _name = _json['audioFileMetadata']['name']
     _duration = _json['audioFileMetadata']['duration']
-    _type = _json['type']
     _content = _json['audioFileMetadata']['content']
     _upload_time = datetime.datetime.now()
     _host = _json['audioFileMetadata']['host']
