@@ -2,7 +2,6 @@ from flask import Flask, jsonify, request
 from flask_pymongo import PyMongo
 from bson.json_util import dumps
 from bson.objectid import ObjectId
-from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
 from validate import validateParticipants, validatePodcast, validateName, validateDuration, validateAudioBook
 
